@@ -1,0 +1,18 @@
+[Unit]
+Description=k3s agent
+Wants=network-online.target
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=notify
+
+EnvironmentFile=-/etc/systemd/system/k3s.service.env
+
+Restart=always
+RestartSec=5s
+ExecStart=/usr/local/bin/k3s agent
+
+

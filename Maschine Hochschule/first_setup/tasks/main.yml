@@ -1,0 +1,19 @@
+---
+# tasks file for first_setup
+
+ - name: Add group "labadmin" to remote server
+   group:
+       name: labadmin
+#       gid: 2010
+       state: present
+
+ - name: Add user "labadmin" to remote server
+   user:
+     name: labadmin
+     comment: "Accountant UnPrivileged User"
+     uid: 2002
+     group: labadmin
+     shell: /bin/bash
+     generate_ssh_key: yes
+     ssh_key_bits: 2048
+     ssh_key_file: .ssh/id_rsa

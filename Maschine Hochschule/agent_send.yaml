@@ -1,0 +1,10 @@
+- name: Uebertraung von s3k.service und Installation von k3s
+  remote_user: ubuntu
+  become: yes
+  hosts:
+    - moin
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  roles:
+    - agent_k3s

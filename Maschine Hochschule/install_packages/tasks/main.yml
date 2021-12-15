@@ -1,0 +1,18 @@
+---
+# tasks file for install_packages
+  
+- name: Install wireshark
+  apt:
+    name: tshark
+
+- name: Install ethtool
+  apt:
+    name: ethtool
+
+- name: Install xeyes
+  apt:
+    name: x11-apps
+
+- name: Install sl
+  apt:
+    name: sl

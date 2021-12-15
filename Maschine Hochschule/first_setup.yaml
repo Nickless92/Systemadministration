@@ -1,0 +1,12 @@
+- name: Install base-system
+  remote_user: root
+  hosts:
+    - gude 
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  roles:
+    - first_setup
+    - install_packages
+

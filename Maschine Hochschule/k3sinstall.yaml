@@ -1,0 +1,21 @@
+- name: Installation von k3s und Anpassung des bin-Verzeichnisses
+  remote_user: ubuntu
+  become: yes
+  hosts:
+    - moin
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  roles:
+    - k3s_installation
+
+- name: Installation von k3s und Anpassung des bin-Verzeichnisses
+  remote_user: root
+  become: yes
+  hosts:
+    - gude
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  roles:
+    - k3s_installation

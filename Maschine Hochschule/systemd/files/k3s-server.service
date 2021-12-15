@@ -1,0 +1,16 @@
+#[Unit]
+Description=k3s server
+Wants=network-online.target
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=notify
+
+Restart=always
+RestartSec=5s
+ExecStart=/usr/local/bin/k3s server
+
+
