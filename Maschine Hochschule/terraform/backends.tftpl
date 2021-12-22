@@ -1,0 +1,7 @@
+[gcp]
+%{ for addr in gcp_nodes ~}
+${addr}
+%{ endfor ~}
+
+#[gcp:vars]
+#ansible_user=labadmin

@@ -74,3 +74,20 @@ resource "google_compute_firewall" "rules" {
 
 
 
+#data "template_file" "init" {
+ # template = "${file("/home/dominic/Dokumente/Systemadministration/Maschine Hochschule/terraform/backends.tftpl")}"
+  #vars = {
+   # consul_address = "${aws_instance.consul.private_ip}"
+  #}
+#}
+
+
+
+
+  module "cloud-nat" {
+  source  = "terraform-google-modules/cloud-nat/google"
+  version = "2.1.0"
+  # insert the 4 required variables here
+  
+}
+
