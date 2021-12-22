@@ -32,8 +32,8 @@
     name: k3s-agent.service
     state: started
 
-- name: checking service status
-  command: systemctl status k3s-agent.service
+#- name: checking service status
+#  command: systemctl status k3s-agent.service
 
-- name: logs ausgeben
-  command:  journalctl -u k3s-agent.service -f
+#- name: logs ausgeben
+#  command:  journalctl -u k3s-agent.service -f
