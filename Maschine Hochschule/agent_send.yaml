@@ -1,8 +1,8 @@
 - name: Uebertraung von s3k.service und Installation von k3s
-  remote_user: dominic
+  remote_user: bruno
   become: yes
   hosts:
-    - gcpknoten
+    - node
   become_method: sudo
   gather_facts: no
   connection: ssh

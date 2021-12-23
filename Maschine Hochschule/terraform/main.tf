@@ -30,7 +30,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 
   metadata = {
-    ssh-keys = "dominic:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "bruno:${file("~/.ssh/id_rsa.pub")}"
   }
 
 

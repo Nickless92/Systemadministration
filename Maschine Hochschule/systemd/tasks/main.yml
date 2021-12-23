@@ -29,5 +29,5 @@
 - name: checking service status
   command: systemctl status k3s-server.service
 
-- name: logs ausgeben
-  command:  journalctl -u k3s-server.service -f
+#- name: logs ausgeben
+#  command:  journalctl -u k3s-server.service -f

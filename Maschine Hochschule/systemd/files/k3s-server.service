@@ -1,4 +1,4 @@
-#[Unit]
+[Unit]
 Description=k3s server
 Wants=network-online.target
 After=network-online.target
@@ -12,5 +12,3 @@ Type=notify
 Restart=always
 RestartSec=5s
 ExecStart=/usr/local/bin/k3s server
-
-
