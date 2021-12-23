@@ -1,9 +1,8 @@
 - name: Installation von k3s und Anpassung des bin-Verzeichnisses
-  remote_user: bruno
+  remote_user: dominic
   become: yes
   hosts:
-    - googlemaster
-    - googleknoten
+    - gcp
   become_method: sudo
   gather_facts: yes
   connection: ssh

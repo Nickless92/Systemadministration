@@ -16,15 +16,23 @@ provider "google" {
 }
 
 
-resource "google_compute_instance" "vm_instance2" {
-  name         = "knoten2"
-  machine_type = "f1-micro"
+
+resource "google_compute_instance" "vm_instance" {
+  allow_stopping_for_update = true
+  count			                = 3
+  machine_type              = "f1-micro"
+  name                      = "knoten-${count.index}"
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "ubuntu-os-cloud/ubuntu-2004-lts"
     }
   }
+
+  metadata = {
+    ssh-keys = "dominic:${file("~/.ssh/id_rsa.pub")}"
+  }
+
 
   network_interface {
     network = "terraform-network"
@@ -33,26 +41,7 @@ resource "google_compute_instance" "vm_instance2" {
   }
 }
 
-
-resource "google_compute_instance" "vm_instance3" {
-  name         = "knoten3"
-  machine_type = "f1-micro"
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-9"
-    }
-  }
-
-  network_interface {
-    network = "terraform-network"
-    access_config {
-    }
-  }
-}
-
-
-resource "google_compute_firewall" "rules" {
+resource "google_compute_firewall" "ssh" {
   project     = "ecstatic-pod-334509"
   name        = "ssh-firewall"
   network     = "terraform-network"
@@ -66,28 +55,28 @@ resource "google_compute_firewall" "rules" {
   allow {
     protocol  = "icmp"
   }
+}
 
+resource "google_compute_firewall" "k3s" {
+  project     = "ecstatic-pod-334509"
+  name        = "k3s"
+  network     = "terraform-network"
 
-#  source_tags = ["foo"]
-#  target_tags = ["web"]
+  allow {
+    protocol = "tcp"
+    ports    = ["6443"]
+  }
+
 }
 
 
-
-#data "template_file" "init" {
- # template = "${file("/home/dominic/Dokumente/Systemadministration/Maschine Hochschule/terraform/backends.tftpl")}"
-  #vars = {
-   # consul_address = "${aws_instance.consul.private_ip}"
-  #}
-#}
-
-
-
-
-  module "cloud-nat" {
-  source  = "terraform-google-modules/cloud-nat/google"
-  version = "2.1.0"
-  # insert the 4 required variables here
-  
+# generate inventory file for Ansible
+resource "local_file" "gcp_hosts_cfg" {
+  content = templatefile("${path.module}/inventory.tftpl",
+    {
+      gcp_nodes =google_compute_instance.vm_instance[*].network_interface[0].access_config[0].nat_ip
+    }
+  )
+  file_permission = 660
+  filename = "${path.module}/gcp_hosts.cfg"
 }
-
