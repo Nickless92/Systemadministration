@@ -2,7 +2,7 @@
   remote_user: bruno
   become: yes
   hosts:
-    - node
+    - googleknoten
   become_method: sudo
   gather_facts: no
   connection: ssh

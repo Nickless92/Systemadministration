@@ -5,7 +5,11 @@
   ansible.builtin.copy:
     src: k3s-server.service
     dest: /etc/systemd/system/k3s-server.service
-    mode: 755    
+    mode: 755
+    notify:
+      - Reload k32-server.service
+      - restart k3s-server.service
+      
 
 #- name: display content k3s-server.service
 #  command: systemctl cat k3s-server.service
@@ -15,19 +19,19 @@
 #  debug: 
 #    msg: "{{command_output.stdout}}"
 
-- name: enable k3s-server.service
-  ansible.builtin.service:
-    name: k3s-server.service
+#- name: enable k3s-server.service
+#  ansible.builtin.service:
+#    name: k3s-server.service
     #state: started
-    enabled: yes
+#    enabled: yes
 
-- name: Start service k3s-server.service
-  ansible.builtin.service:
-    name: k3s-server.service
-    state: started
+#- name: Start service k3s-server.service
+#  ansible.builtin.service:
+#    name: k3s-server.service
+#    state: started
 
-- name: checking service status
-  command: systemctl status k3s-server.service
+#- name: checking service status
+#  command: systemctl status k3s-server.service
 
 #- name: logs ausgeben
 #  command:  journalctl -u k3s-server.service -f

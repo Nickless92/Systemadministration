@@ -13,6 +13,14 @@
     dest: /etc/systemd/system/k3s.service.env
     mode: 755
 
+- name: logs ausgeben
+  command:  journalctl -u k3s-agent.service -f
+  notify:
+          - Reload k3s-agent.service
+          - Restart k3s-agent.service
+
+
+
 #- name: display content k3s-server.service
 #  command: systemctl cat k3s-server.service
 #  register: command_output
@@ -21,19 +29,17 @@
 #  debug: 
 #    msg: "{{command_output.stdout}}"
 
-- name: enable k3s-agent.service
-  ansible.builtin.service:
-    name: k3s-agent.service
-    state: started
-    enabled: yes
+#- name: enable k3s-agent.service
+#  ansible.builtin.service:
+#    name: k3s-agent.service
+#    state: started
+#    enabled: yes
 
-- name: Start service k3s-agent.service
-  ansible.builtin.service:
-    name: k3s-agent.service
-    state: started
+#- name: Start service k3s-agent.service
+#  ansible.builtin.service:
+#    name: k3s-agent.service
+#    state: started
 
 #- name: checking service status
 #  command: systemctl status k3s-agent.service
 
-#- name: logs ausgeben
-#  command:  journalctl -u k3s-agent.service -f

@@ -1,2 +1,11 @@
 ---
 # handlers file for systemd
+  - name: Reload k3s-server.service
+    service:
+      name: k3s-server.service
+      state: reloaded
+
+  - name: restart k3s-server.service
+    service:
+      name: k3s-server.service
+      state: restarted

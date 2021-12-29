@@ -1,6 +1,4 @@
--  hosts:
-    - googlemaster
-    - googleknoten
+-  hosts: all
    remote_user: labadmin
    connection: ssh
    gather_facts: true

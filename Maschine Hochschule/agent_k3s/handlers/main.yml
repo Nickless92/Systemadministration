@@ -1,2 +1,11 @@
 ---
 # handlers file for agent_k3s
+  - name: Reload k3s-agent.service
+    service:
+      name: k3s-agent.service
+      state: reloaded
+
+  - name: Restart k3s-agent.service
+    service:
+      name: k3s-agent.service
+      state: restarted
